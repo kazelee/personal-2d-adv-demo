@@ -1,6 +1,8 @@
 class_name StateMachine
 extends Node
 
+const KEEP_CURRENT := -1
+
 # 避免枚举默认为0，导致“从0变到0”
 var current_state: int = -1:
 	# 使用父节点的函数为变量赋值
@@ -22,7 +24,7 @@ func _ready() -> void:
 func _physics_process(delta: float) -> void:
 	while true:
 		var next := owner.get_next_state(current_state) as int
-		if current_state == next:
+		if next == KEEP_CURRENT:
 			break
 		current_state = next
 
